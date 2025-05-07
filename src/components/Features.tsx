@@ -1,7 +1,32 @@
 
 import { Map, Search, Navigation, Clock, Compass, MessageSquare } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Features = () => {
+  const [visible, setVisible] = useState(false);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.getElementById("features-section");
+    if (section) {
+      observer.observe(section);
+    }
+
+    return () => {
+      if (section) {
+        observer.unobserve(section);
+      }
+    };
+  }, []);
+
   const features = [
     {
       icon: <Map className="h-6 w-6 text-white" />,
@@ -42,13 +67,13 @@ const Features = () => {
   ];
 
   return (
-    <div id="features" className="bg-white py-16 md:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-poppins font-bold text-3xl sm:text-4xl text-mapaccent1 mb-4">
+    <div id="features" className="bg-background py-16 md:py-24 transition-colors duration-300">
+      <div id="features-section" className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16 fade-in">
+          <h2 className="font-poppins font-bold text-3xl sm:text-4xl text-foreground mb-4 transition-colors duration-300">
             Navigate With <span className="text-primary">Confidence</span>
           </h2>
-          <p className="font-inter text-gray-600">
+          <p className="font-inter text-muted-foreground transition-colors duration-300">
             PathhFinder combines cutting-edge technology with student-centric design to create 
             the ultimate campus navigation experience.
           </p>
@@ -58,13 +83,16 @@ const Features = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col"
+              className={`bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-400 p-6 flex flex-col transform ${
+                visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className={`${feature.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
+              <div className={`${feature.color} w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110`}>
                 {feature.icon}
               </div>
-              <h3 className="font-poppins font-semibold text-xl mb-2 text-mapaccent1">{feature.title}</h3>
-              <p className="font-inter text-gray-600 flex-grow">{feature.description}</p>
+              <h3 className="font-poppins font-semibold text-xl mb-2 text-foreground transition-colors duration-300">{feature.title}</h3>
+              <p className="font-inter text-muted-foreground flex-grow transition-colors duration-300">{feature.description}</p>
             </div>
           ))}
         </div>
