@@ -1,23 +1,40 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="bg-background/80 backdrop-blur-md shadow-sm fixed w-full top-0 z-50 transition-colors duration-300">
+    <nav className={`header-transition ${scrolled ? 'header-scrolled' : ''} bg-background/80 backdrop-blur-lg shadow-sm top-0 z-50 transition-colors duration-300`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
             <a href="#" className="flex-shrink-0">
-              <h1 className="font-poppins font-bold text-2xl text-primary">
+              <h1 className="font-dm-sans font-bold text-2xl text-primary">
                 Pathh<span className="text-mapaccent3">Finder</span>
               </h1>
             </a>
@@ -25,7 +42,7 @@ const Navbar = () => {
 
           {/* Desktop menu */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-8 font-inter">
+            <div className="ml-10 flex items-center space-x-8">
               <a href="#features" className="text-foreground hover:text-primary transition-colors duration-300">
                 Features
               </a>
@@ -60,8 +77,8 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md shadow-lg rounded-b-2xl transition-all duration-300 animate-fade-in">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-inter">
+        <div className="md:hidden bg-background/95 backdrop-blur-md shadow-lg rounded-b-3xl transition-all duration-300 animate-fade-in">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a 
               href="#features" 
               className="block px-3 py-2 rounded-xl text-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-300"

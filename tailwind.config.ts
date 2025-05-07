@@ -158,7 +158,9 @@ export default {
 			},
 			fontFamily: {
 				'poppins': ['Poppins', 'sans-serif'],
-				'inter': ['Inter', 'sans-serif']
+				'inter': ['Inter', 'sans-serif'],
+				'dm-sans': ['DM Sans', 'sans-serif'],
+				'roboto': ['Roboto', 'sans-serif']
 			},
 			transitionProperty: {
 				'height': 'height',

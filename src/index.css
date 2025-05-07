@@ -21,7 +21,7 @@
     --secondary: 199 92% 64%;
     --secondary-foreground: 0 0% 100%;
 
-    --appbg: 0 0% 95%;
+    --appbg: 0 0% 98%;
     --mapaccent1: 0 0% 13%;
     --mapaccent2: 30 93% 62%;
     --mapaccent3: 147 55% 42%;
@@ -39,7 +39,7 @@
     --input: 240 5.9% 90%;
     --ring: 210 100% 50%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -53,38 +53,38 @@
 
   .dark {
     /* Dark Mode Theme */
-    --background: 240 10% 3.9%;
+    --background: 220 70% 10%;
     --foreground: 0 0% 98%;
 
-    --card: 240 10% 3.9%;
+    --card: 220 70% 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 10% 3.9%;
+    --popover: 220 70% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 210 100% 50%;
+    --primary: 220 70% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 199 92% 64%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 45 100% 60%;
+    --secondary-foreground: 220 70% 20%;
 
-    --appbg: 240 6% 10%;
+    --appbg: 220 70% 15%;
     --mapaccent1: 0 0% 95%;
     --mapaccent2: 30 93% 62%;
     --mapaccent3: 147 55% 42%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 220 70% 20%;
+    --muted-foreground: 220 10% 80%;
 
-    --accent: 240 3.7% 15.9%;
+    --accent: 220 70% 20%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 210 100% 50%;
+    --border: 220 70% 20%;
+    --input: 220 70% 20%;
+    --ring: 45 100% 60%;
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -103,11 +103,15 @@
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground transition-colors duration-300 font-roboto;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-dm-sans;
   }
   
   .glass-effect {
-    @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-xl;
+    @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl;
   }
   
   .card-hover {
@@ -124,5 +128,21 @@
   
   .fade-in-left {
     @apply animate-fade-in-left;
+  }
+  
+  .gradient-blue {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+  
+  .gradient-yellow {
+    @apply bg-gradient-to-r from-secondary to-secondary/70;
+  }
+  
+  .header-transition {
+    @apply transition-all duration-500 ease-in-out fixed w-full;
+  }
+  
+  .header-scrolled {
+    @apply w-[80%] mx-auto rounded-xl;
   }
 }
